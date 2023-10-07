@@ -1,4 +1,4 @@
-﻿namespace SuperHeroAPI
+﻿namespace Backend.API
 {
     public class SuperHero
     {

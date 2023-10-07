@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SuperHeroAPI.Data;
+using Backend.API.Data;
 
-namespace SuperHeroAPI.Controllers
+namespace Backend.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

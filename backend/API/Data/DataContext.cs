@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace SuperHeroAPI.Data
+namespace Backend.API.Data
 {
     public class DataContext : DbContext
     {
