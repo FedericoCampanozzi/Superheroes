@@ -3,11 +3,11 @@ import { SuperHero } from 'src/app/models/super-hero';
 import { SuperHeroService } from 'src/app/services/super-hero.service';
 
 @Component({
-  selector: 'app-edit-hero',
-  templateUrl: './edit-hero.component.html',
-  styleUrls: ['./edit-hero.component.css'],
+  selector: 'app-hero-detail',
+  templateUrl: './hero-detail.component.html',
+  styleUrls: ['./hero-detail.component.css'],
 })
-export class EditHeroComponent implements OnInit {
+export class HeroDetailComponent implements OnInit {
   @Input() hero?: SuperHero;
   @Output() heroesUpdated = new EventEmitter<SuperHero[]>();
 

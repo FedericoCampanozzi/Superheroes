@@ -1,43 +1,35 @@
-import { Component } from '@angular/core';
-import { City, SuperHero } from './models/super-hero';
-import { SuperHeroService } from './services/super-hero.service';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {FormControl} from '@angular/forms';
+import { MatSidenav } from '@angular/material/sidenav';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'SuperHero.UI';
-  heroes: SuperHero[] = [];
-  cities: City[] = [];
-  heroToEdit?: SuperHero;
+  mode = new FormControl('over');
+  open = true;
 
-  constructor(private superHeroService: SuperHeroService) {}
+  @ViewChild("sidefilter") sidenav?: MatSidenav = undefined;
 
-  ngOnInit(): void {
-    this.superHeroService
-      .getSuperHeroes()
-      .subscribe((result: SuperHero[]) => (this.heroes = result));
+  public constructor(){
+  }
+
+  ngAfterViewInit() {
+    if(this.sidenav != undefined){
+      this.sidenav?.open();
+    }
+  }
+
+  toggle(){
+    this.sidenav?.toggle();
+  }
+
+  cerca(){
     
-      this.superHeroService
-      .getCities()
-      .subscribe((result: City[]) => {
-        this.cities = result;
-        console.log(result);
-      });
-
-  }
-
-  updateHeroList(heroes: SuperHero[]) {
-    this.heroes = heroes;
-  }
-
-  initNewHero() {
-    this.heroToEdit = new SuperHero();
-  }
-
-  editHero(hero: SuperHero) {
-    this.heroToEdit = hero;
+    this.sidenav?.toggle();
   }
 }
