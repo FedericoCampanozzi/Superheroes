@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SuperHero } from './models/super-hero';
+import { City, SuperHero } from './models/super-hero';
 import { SuperHeroService } from './services/super-hero.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { SuperHeroService } from './services/super-hero.service';
 export class AppComponent {
   title = 'SuperHero.UI';
   heroes: SuperHero[] = [];
+  cities: City[] = [];
   heroToEdit?: SuperHero;
 
   constructor(private superHeroService: SuperHeroService) {}
@@ -18,6 +19,14 @@ export class AppComponent {
     this.superHeroService
       .getSuperHeroes()
       .subscribe((result: SuperHero[]) => (this.heroes = result));
+    
+      this.superHeroService
+      .getCities()
+      .subscribe((result: City[]) => {
+        this.cities = result;
+        console.log(result);
+      });
+
   }
 
   updateHeroList(heroes: SuperHero[]) {

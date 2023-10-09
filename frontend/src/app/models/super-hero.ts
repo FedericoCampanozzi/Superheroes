@@ -3,5 +3,11 @@ export class SuperHero {
     name = "";
     firstName = "";
     lastName = "";
-    place = "";
+    idCity?: number;
+}
+
+export class City {
+    id?: number;
+    city = "";
+    nationCode = "";
 }

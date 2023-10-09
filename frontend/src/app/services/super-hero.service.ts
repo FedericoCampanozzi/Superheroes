@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { SuperHero } from '../models/super-hero';
+import { City, SuperHero } from '../models/super-hero';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SuperHeroService {
   private url = 'SuperHero';
-
+  private GetCity = 'city/get'
+  
   constructor(private http: HttpClient) {}
 
   public getSuperHeroes(): Observable<SuperHero[]> {
@@ -33,6 +34,12 @@ export class SuperHeroService {
   public deleteHero(hero: SuperHero): Observable<SuperHero[]> {
     return this.http.delete<SuperHero[]>(
       `${environment.apiUrl}/${this.url}/${hero.id}`
+    );
+  }
+
+  public getCities(): Observable<City[]>{
+    return this.http.get<City[]>(
+      `${environment.apiUrl}/${this.url}/${this.GetCity}`
     );
   }
 }

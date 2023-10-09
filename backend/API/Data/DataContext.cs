@@ -6,5 +6,6 @@ namespace Backend.API.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<SuperHero> SuperHeroes => Set<SuperHero>();
+        public DbSet<City> Cities => Set<City>();
     }
 }

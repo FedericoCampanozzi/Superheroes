@@ -21,6 +21,12 @@ namespace Backend.API.Controllers
         {
             return Ok(await _context.SuperHeroes.ToListAsync());
         }
+        
+        [HttpGet("city/get")]
+        public async Task<ActionResult<List<SuperHero>>> GetCities()
+        {
+            return Ok(await _context.Cities.ToListAsync());
+        }
 
         [HttpPost]
         public async Task<ActionResult<List<SuperHero>>> CreateSuperHero(SuperHero hero)
@@ -41,7 +47,7 @@ namespace Backend.API.Controllers
             dbHero.Name = hero.Name;
             dbHero.FirstName = hero.FirstName;
             dbHero.LastName = hero.LastName;
-            dbHero.Place = hero.Place;
+            dbHero.IdCity = hero.IdCity;
 
             await _context.SaveChangesAsync();
 
