@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.API.Data;
+using Backend.API.Data.Model;
 
 namespace Backend.API.Controllers
 {
@@ -16,19 +17,7 @@ namespace Backend.API.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<SuperHero>>> GetSuperHeroes()
-        {
-            return Ok(await _context.SuperHeroes.ToListAsync());
-        }
-        
-        [HttpGet("city/get")]
-        public async Task<ActionResult<List<SuperHero>>> GetCities()
-        {
-            return Ok(await _context.Cities.ToListAsync());
-        }
-
-        [HttpPost]
+        [HttpPost("create")]   
         public async Task<ActionResult<List<SuperHero>>> CreateSuperHero(SuperHero hero)
         {
             _context.SuperHeroes.Add(hero);
@@ -37,7 +26,13 @@ namespace Backend.API.Controllers
             return Ok(await _context.SuperHeroes.ToListAsync());
         }
 
-        [HttpPut]
+        [HttpGet("read")]
+        public async Task<ActionResult<List<SuperHero>>> GetSuperHeroes()
+        {
+            return Ok(await _context.SuperHeroes.ToListAsync());
+        }
+
+        [HttpPut("update")]
         public async Task<ActionResult<List<SuperHero>>> UpdateSuperHero(SuperHero hero)
         {
             var dbHero = await _context.SuperHeroes.FindAsync(hero.Id);
@@ -54,7 +49,7 @@ namespace Backend.API.Controllers
             return Ok(await _context.SuperHeroes.ToListAsync());
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete")]
         public async Task<ActionResult<List<SuperHero>>> DeleteSuperHero(int id)
         {
             var dbHero = await _context.SuperHeroes.FindAsync(id);

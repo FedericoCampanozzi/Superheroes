@@ -2,44 +2,40 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { City, SuperHero } from '../models/super-hero';
+import { SuperHero } from '../models/super-hero.dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SuperHeroService {
-  private url = 'SuperHero';
-  private GetCity = 'city/get'
+  private Create = 'SuperHero/create';
+  private Read = 'SuperHero/read';
+  private Update = 'SuperHero/update';
+  private Delete = 'SuperHero/delete';
   
   constructor(private http: HttpClient) {}
 
   public getSuperHeroes(): Observable<SuperHero[]> {
-    return this.http.get<SuperHero[]>(`${environment.apiUrl}/${this.url}`);
+    return this.http.get<SuperHero[]>(`${environment.apiUrl}/${this.Read}`);
   }
 
   public updateHero(hero: SuperHero): Observable<SuperHero[]> {
     return this.http.put<SuperHero[]>(
-      `${environment.apiUrl}/${this.url}`,
+      `${environment.apiUrl}/${this.Update}`,
       hero
     );
   }
 
   public createHero(hero: SuperHero): Observable<SuperHero[]> {
     return this.http.post<SuperHero[]>(
-      `${environment.apiUrl}/${this.url}`,
+      `${environment.apiUrl}/${this.Create}`,
       hero
     );
   }
 
   public deleteHero(hero: SuperHero): Observable<SuperHero[]> {
     return this.http.delete<SuperHero[]>(
-      `${environment.apiUrl}/${this.url}/${hero.id}`
-    );
-  }
-
-  public getCities(): Observable<City[]>{
-    return this.http.get<City[]>(
-      `${environment.apiUrl}/${this.url}/${this.GetCity}`
+      `${environment.apiUrl}/${this.Delete}/${hero.id}`
     );
   }
 }

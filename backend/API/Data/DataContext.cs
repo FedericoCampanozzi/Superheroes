@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Backend.API.Data.Model;
 
 namespace Backend.API.Data
 {
