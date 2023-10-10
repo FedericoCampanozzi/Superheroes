@@ -1,28 +1,33 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
-
+import { City } from './models/city.dto';
+import { CityService } from './services/city.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'SuperHero.UI';
   mode = new FormControl('over');
   open = true;
+  cities: City[] = [];
 
   @ViewChild("sidefilter") sidenav?: MatSidenav = undefined;
 
-  public constructor(){
+  public constructor(private CityService: CityService){
   }
 
-  ngAfterViewInit() {
-    if(this.sidenav != undefined){
-      this.sidenav?.open();
-    }
+  ngOnInit(): void {
+    this.CityService
+    .getCities()
+    .subscribe((result: City[]) => {
+      this.cities = result;
+    });
   }
+
 
   toggle(){
     this.sidenav?.toggle();

@@ -7,35 +7,39 @@
   </mat-toolbar>
   <mat-sidenav-container>
     <mat-sidenav #sidefilter [mode]="'over'" class="my-sidenav-container">
-      <div class="my-sidenav-inner-container">        
-        <button color="primary" mat-stroked-button (click)="cerca()"><mat-icon>search</mat-icon>Cerca</button>
+      <div class="my-sidenav-inner-container">
+        <mat-form-field class="w-100">
+          <mat-label>City</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let city of cities" value="city.id">
+              {{ city.id }} {{ city.cityName }} ({{ city.codeNation }})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div fxLayoutAlign="center center">
+          <button color="primary" mat-stroked-button (click)="cerca()"><mat-icon>search</mat-icon>Cerca</button>
+        </div>
       </div>
     </mat-sidenav>
     <mat-sidenav-content>
       <app-hero-table></app-hero-table>
-
-      <footer>
-        <div fxLayout="row" fxLayoutAlign="space-around center">
-          <div class="pad-m" fxLayout="column" fxFlex="30">
-            Federico Campanozzi 2023
-          </div>
-          <div class="row pad-m" fxLayout="column" fxFlex="40">
-            SuperHero Management System <br>
-            Developed with: Angular 14, .NET (Entity Framework) and SQL SERVER
-          </div>
-          <div class="pad-m" fxLayout="column" fxFlex="30">
-            <div fxLayout="row">
-              <div fxLayout="column" fxFlex="50">
-                <a href="#">Tutorial</a>
-              </div>
-              <div fxLayout="column" fxFlex="50">
-                Localhost
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
     </mat-sidenav-content>
   </mat-sidenav-container>
 </main>
+<footer id="my-footer">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div class="pad-m" fxLayout="column" fxFlex="30">
+      Federico Campanozzi 2023
+    </div>
+    <div class="row pad-m" fxLayout="column" fxFlex="40">
+      SuperHero
+    </div>
+    <div class="pad-m" fxLayout="column" fxFlex="30">
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="50">
+          <a href="https://www.youtube.com/watch?v=dtthbiP3SE0">Tutorial</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

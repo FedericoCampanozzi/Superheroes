@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
+import { HeroDetailDialogComponent } from './components/hero-detail-dialog/hero-detail-dialog.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -23,12 +23,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexModule } from '@angular/flex-layout';
+import { CityService } from './services/city.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroTableComponent,
-    HeroDetailComponent
+    HeroDetailDialogComponent
   ],
   imports: [
     MatSidenavModule,
@@ -53,7 +54,8 @@ import { FlexModule } from '@angular/flex-layout';
     FlexModule
   ],
   providers: [
-    SuperHeroService
+    SuperHeroService,
+    CityService
   ],
   bootstrap: [AppComponent]
 })
