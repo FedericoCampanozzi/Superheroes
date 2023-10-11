@@ -1,22 +1,64 @@
-<div class="test" *ngIf="hero" style="background-image: url('https://images5.alphacoders.com/132/1328421.png');">
-  <h2>{{ hero.name }}</h2>
-  <div>
-    Name:
-    <input [(ngModel)]="hero.name" placeholder="Name" />
+<button mat-icon-button color="warn" class="close-btn" (click)="exitDialog()"><mat-icon>close</mat-icon></button>
+<div class="dialog-container">
+  <form>
+    <div fxLayout="row">
+      <div fxFlex="25">
+        <mat-form-field class="w-100">
+          <mat-label for="id">ID</mat-label>
+          <input matInput placeholder="ID" [disabled]="true" [(ngModel)]="hero.id" name="id">
+        </mat-form-field>
+      </div>
+      <div fxFlex="75">
+        <mat-form-field class="w-100">
+          <mat-label for="name">Name</mat-label>
+          <input matInput placeholder="Name" [disabled]="!(editMode || addMode)" [(ngModel)]="hero.name" name="name">
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div fxFlex="50">
+        <mat-form-field class="w-100">
+          <mat-label for="firstName">First Name</mat-label>
+          <input matInput placeholder="First Name" [disabled]="!(editMode || addMode)" [(ngModel)]="hero.firstName"
+            name="firstName">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50">
+        <mat-form-field class="w-100">
+          <mat-label for="lastName">Last Name</mat-label>
+          <input matInput placeholder="Last Name" [disabled]="!(editMode || addMode)" [(ngModel)]="hero.lastName"
+            name="lastName">
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div fxFlex="100">
+        <mat-form-field class="w-100">
+          <mat-label for="idCity">City</mat-label>
+          <mat-select [(value)]="hero.idCity" [disabled]="!(editMode || addMode)" name="idCity">
+            <mat-option *ngFor="let city of cities" [value]="city.id">
+              {{ city.id }} - {{ city.cityName }} ({{ city.codeNation }})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <div fxLayout="row">
+    <div fxFlex="100" *ngIf="!editMode && !addMode">
+      <button mat-raised-button color="primary" (click)="changeMode(true)" class="w-100">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="50" *ngIf="editMode || addMode">
+      <button mat-raised-button color="primary" (click)="changeMode(true)" class="w-100">
+        <mat-icon>check</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="50" *ngIf="editMode || addMode">
+      <button mat-raised-button color="warn" (click)="changeMode(false)" class="w-100">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
   </div>
-  <div>
-    First Name:
-    <input [(ngModel)]="hero.firstName" placeholder="First Name" />
-  </div>
-  <div>
-    Last Name:
-    <input [(ngModel)]="hero.lastName" placeholder="Last Name" />
-  </div>
-  <div>
-    Place:
-    <input [(ngModel)]="hero.idCity" placeholder="idCity" />
-  </div>
-  <button (click)="updateHero(hero)" *ngIf="hero.id">Save</button>
-  <button (click)="deleteHero(hero)" *ngIf="hero.id">Delete</button>
-  <button (click)="createHero(hero)" *ngIf="!hero.id">Create</button>
 </div>

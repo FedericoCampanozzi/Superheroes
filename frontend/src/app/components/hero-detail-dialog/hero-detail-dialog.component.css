@@ -2,3 +2,17 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.dialog-container {
+  width: 350px;
+  height: 500px;
+  padding: 35px;
+  overflow-y: auto;
+  border-radius: 20px;
+}
+
+.close-btn{
+  position: relative;
+  top: -14px;
+  right: -394px;
+}

@@ -18,10 +18,31 @@ footer {
   color: white;
   font-size: 14px;
   font: 500 20px / 32px Roboto, "Helvetica Neue", sans-serif;
-    letter-spacing: normal;
-
+  letter-spacing: normal;
 }
 
 main {
+  height: 100%;
+}
+
+footer > div.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.box-item {
+  width: 30%;
+  margin: auto 1.5%;
+  height: 100%;
+}
+
+.box-item-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
 }

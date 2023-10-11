@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { City } from 'src/app/models/city.dto';
 import { SuperHero } from 'src/app/models/super-hero.dto';
@@ -10,8 +10,8 @@ import { SuperHeroService } from 'src/app/services/super-hero.service';
   templateUrl: './hero-detail-dialog.component.html',
   styleUrls: ['./hero-detail-dialog.component.css'],
 })
-export class HeroDetailDialogComponent implements OnInit {
-  hero?: SuperHero;
+export class HeroDetailDialogComponent {
+  hero: SuperHero;
   editMode = false;
   addMode = false;
   cities: City[] = [];
@@ -25,31 +25,31 @@ export class HeroDetailDialogComponent implements OnInit {
     this.cityService.getCities().subscribe(res => {
       this.cities = res;
     });
+    this.addMode = data.IsAddMode;
   }
 
-  ngOnInit(): void {
-
+  onConfirmClick(): void {
+    this.dialogRef.close(true);
   }
 
-  updateHero(hero: SuperHero) {
-    /*this.superHeroService
-      .updateHero(hero)
-      .subscribe((heroes: SuperHero[]) => this.heroesUpdated.emit(heroes));*/
+  changeMode(save: boolean){
+    if(this.addMode){
+      if(save){
+        this.superHeroService.createHero(this.hero)
+        .subscribe((heroes: SuperHero[]) => console.log(heroes));
+      }
+      this.dialogRef.close(true);
+    }
+    else {
+      if(this.editMode && save){
+        this.superHeroService.updateHero(this.hero)
+        .subscribe((heroes: SuperHero[]) => console.log(heroes));
+      } 
+      this.editMode = !this.editMode;
+    }
   }
 
-  deleteHero(hero: SuperHero) {
-    /*
-    this.superHeroService
-      .deleteHero(hero)
-      .subscribe((heroes: SuperHero[]) => this.heroesUpdated.emit(heroes));
-      */
-  }
-
-  createHero(hero: SuperHero) {
-    /*
-    this.superHeroService
-      .createHero(hero)
-      .subscribe((heroes: SuperHero[]) => this.heroesUpdated.emit(heroes));
-      */
+  exitDialog(){
+    this.dialogRef.close(true);
   }
 }

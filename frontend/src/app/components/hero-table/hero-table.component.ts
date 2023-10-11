@@ -29,9 +29,6 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
     this.superHeroService
       .getSuperHeroes()
       .subscribe((result: SuperHero[]) => {
-        for(let i=0;i<100;i++){
-          result.push(new SuperHero());
-        }
         this.heroesDataSource.data = result;
       });
   }
@@ -56,42 +53,35 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
     let divTop = (d == null || d.getBoundingClientRect() == null ? 0 : d.getBoundingClientRect().top);
     let footerTop = (f == null || f.getBoundingClientRect() == null ? 0 : f.getBoundingClientRect().top);
     let paginatorHeight = (p == null || p.getBoundingClientRect() == null ? 0 : p.offsetHeight);
-    d?.setAttribute("style","overflow-y:auto; max-height: " + (footerTop - divTop - paginatorHeight - 10) + "px;");
-  }
-
-  updateHeroList(heroes: SuperHero[]) {
-    //this.heroesDataSource.data = heroes;
-  }
-
-  initNewHero() {
-    //this.heroToEdit = new SuperHero();
-  }
-
-  editHero(hero: SuperHero) {
-    //this.heroToEdit = hero;
-  }
-
-  deleteHero(hero: SuperHero) {
-    this.superHeroService.deleteHero(hero);
+    d?.setAttribute("style","overflow-y:auto; height: " + (footerTop - divTop - paginatorHeight - 10) + "px;");
   }
   
-  showDetail(hero: SuperHero) {
+  deleteHero(hero: SuperHero) {
+    this.superHeroService.deleteHero(hero)
+    .subscribe((heroes: SuperHero[]) => this.heroesDataSource.data = heroes);
+  }
+  
+  showDetail(hero: SuperHero, mode:boolean) {
     this.matDialog.open(HeroDetailDialogComponent, {
       data: {
-        Hero: new SuperHero().copyFrom(hero),
-        IsAddMode: false
+        Hero: mode ? new SuperHero() : new SuperHero().copyFrom(hero),
+        IsAddMode: mode
+      },
+    })
+    .afterClosed().subscribe((res) => {
+      this.superHeroService.getSuperHeroes()
+      .subscribe((result: SuperHero[]) => {
+        this.heroesDataSource.data = result;
+      });
+    });
+  }
+
+  showDetailAdd() {
+    this.matDialog.open(HeroDetailDialogComponent, {
+      data: {
+        Hero: new SuperHero(),
+        IsAddMode: true
       },
     });
   }
-}
-
-function getOffset( el:any ) {
-  var _x = 0;
-  var _y = 0;
-  while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
-      _x += el.offsetLeft - el.scrollLeft;
-      _y += el.offsetTop - el.scrollTop;
-      el = el.offsetParent;
-  }
-  return { top: _y, left: _x };
 }

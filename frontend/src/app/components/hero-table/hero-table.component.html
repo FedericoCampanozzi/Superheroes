@@ -5,27 +5,15 @@
                 <div class="mat-elevation-z8">
                     <div id="maxHeightJS">
 
-                        <table mat-table [dataSource]="heroesDataSource" matSort (matSortChange)="announceSortChange($event)"
-                            #heroTable>
+                        <table mat-table [dataSource]="heroesDataSource" matSort (matSortChange)="announceSortChange($event)" #heroTable>
 
                             <ng-container matColumnDef="ID">
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef class="colum-w-s"> # </th>
-                                <td mat-cell *matCellDef="let hero" class="colum-w-s" sticky>
-                                    <div fxLayout="row" fxLayoutAlign="center center">
-                                        <div fxFlex="75">
-                                            <button mat-icon-button (click)="showDetail(hero)">
-                                                <mat-icon>open_in_new</mat-icon>
-                                            </button>
-                                        </div>
-                                        <div fxFlex="25">
-                                            <span class="inline-with-btn">{{hero.ID}}</span>
-                                        </div>
-                                    </div>
-                                </td>
+                                <td mat-cell *matCellDef="let hero" class="colum-w-s" sticky>{{hero.id}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="Name">
-                                <th mat-header-cell mat-sort-header *matHeaderCellDef> Popular Name </th>
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
                                 <td mat-cell *matCellDef="let hero"> {{hero.name}} </td>
                             </ng-container>
 
@@ -47,11 +35,8 @@
                             <ng-container matColumnDef="Controls" stickyEnd>
                                 <th mat-header-cell *matHeaderCellDef> </th>
                                 <td mat-cell *matCellDef="let hero">
-                                    <button mat-icon-button color="primary" (click)="showDetail(hero)">
+                                    <button mat-icon-button color="primary" (click)="showDetail(hero, false)">
                                         <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button mat-icon-button color="primary" (click)="initNewHero()">
-                                        <mat-icon>add_circle_outline</mat-icon>
                                     </button>
                                     <button mat-icon-button color="warn" (click)="deleteHero(hero)">
                                         <mat-icon>delete</mat-icon>
@@ -64,10 +49,20 @@
 
                         </table>
                     </div>
-                    
-                                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"
-                                            #heroTablePaginator id="my-paginator"> </mat-paginator>
-                                        
+                    <div layout="row" style="background-color: white;">
+                        <div fxFlex="25" fxLayoutAlign="center center">
+                            <button mat-raised-button color="primary" (click)="showDetailAdd()">
+                                <mat-icon>add_circle_outline</mat-icon>
+                                <span class="desktop">
+                                    Add new Hero
+                                </span>
+                            </button>
+                        </div>
+                        <div fxFlex="75">
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page" #heroTablePaginator id="my-paginator"> </mat-paginator>               
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
