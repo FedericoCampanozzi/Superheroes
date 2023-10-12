@@ -12,6 +12,11 @@
                                 <td mat-cell *matCellDef="let hero" class="colum-w-s" sticky>{{hero.id}}</td>
                             </ng-container>
 
+                            <ng-container matColumnDef="DateCreate">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef class="colum-w-s"> Date Creation </th>
+                                <td mat-cell *matCellDef="let hero" class="colum-w-s" sticky>{{UtilityFunction.formatDate(hero.dateCreate)}}</td>
+                            </ng-container>
+
                             <ng-container matColumnDef="Name">
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
                                 <td mat-cell *matCellDef="let hero"> {{hero.name}} </td>
@@ -30,6 +35,13 @@
                             <ng-container matColumnDef="City">
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef> City </th>
                                 <td mat-cell *matCellDef="let hero"> {{hero.idCity}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="IsMainCharacter">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> IsMainCharacter </th>
+                                <td mat-cell *matCellDef="let hero">
+                                    <mat-checkbox class="w-90" [checked]="hero.IsMainCharacter" [disabled]="true"></mat-checkbox>
+                                </td>
                             </ng-container>
 
                             <ng-container matColumnDef="Controls" stickyEnd>
@@ -51,15 +63,14 @@
                     </div>
                     <div layout="row" style="background-color: white;">
                         <div fxFlex="25" fxLayoutAlign="center center">
-                            <button mat-raised-button color="primary" (click)="showDetailAdd()">
+                            <button mat-raised-button color="primary" (click)="showDetailAdd()" style="margin: 10px;">
                                 <mat-icon>add_circle_outline</mat-icon>
                                 <span class="desktop">
                                     Add new Hero
                                 </span>
                             </button>
                         </div>
-                        <div fxFlex="75">
-                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page" #heroTablePaginator id="my-paginator"> </mat-paginator>               
+                        <div fxFlex="75" id="myRef">
                         </div>
                     </div>
 

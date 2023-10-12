@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
 import { City } from './models/city.dto';
 import { CityService } from './services/city.service';
-
+import { FilterHeroDTO } from './models/filter-hero.dto';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   mode = new FormControl('over');
   open = true;
   cities: City[] = [];
+  filter: FilterHeroDTO = new FilterHeroDTO();
 
   @ViewChild("sidefilter") sidenav?: MatSidenav = undefined;
 

@@ -24,6 +24,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexModule } from '@angular/flex-layout';
 import { CityService } from './services/city.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CityService } from './services/city.service';
     MatSelectModule,
     FormsModule,
     MatToolbarModule,
-    FlexModule
+    FlexModule,
+    MatCheckboxModule
   ],
   providers: [
     SuperHeroService,

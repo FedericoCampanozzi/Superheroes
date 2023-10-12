@@ -28,28 +28,25 @@ export class HeroDetailDialogComponent {
     this.addMode = data.IsAddMode;
   }
 
-  onConfirmClick(): void {
-    this.dialogRef.close(true);
-  }
-
   changeMode(save: boolean){
     if(this.addMode){
       if(save){
         this.superHeroService.createHero(this.hero)
-        .subscribe((heroes: SuperHero[]) => console.log(heroes));
+        .subscribe((heroes: SuperHero[]) => {
+          this.dialogRef.close(heroes);
+        });
       }
-      this.dialogRef.close(true);
     }
     else {
       if(this.editMode && save){
         this.superHeroService.updateHero(this.hero)
-        .subscribe((heroes: SuperHero[]) => console.log(heroes));
+        .subscribe((heroes: SuperHero[]) => {});
       } 
       this.editMode = !this.editMode;
     }
   }
 
   exitDialog(){
-    this.dialogRef.close(true);
+    this.dialogRef.close();
   }
 }

@@ -8,14 +8,34 @@
   <mat-sidenav-container>
     <mat-sidenav #sidefilter [mode]="'over'" class="my-sidenav-container">
       <div class="my-sidenav-inner-container">
-        <mat-form-field class="w-90" style="margin-top: 20px;">
+        <mat-form-field class="w-90">
           <mat-label>City</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let city of cities" value="city.id">
+          <mat-select [(value)]="filter.idCity">
+            <mat-option *ngFor="let city of cities" [value]="city.id">
               {{ city.id }} - {{ city.cityName }} ({{ city.codeNation }})
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-checkbox class="w-90" [checked]="filter.isMainCharacter">Main Character</mat-checkbox>
+        <div class="w-90">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="25">
+              <mat-label class="w-90">Date Creation in :</mat-label>
+            </div>
+            <div fxFlex="75">
+              <mat-form-field appearance="fill" class="w-90">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate placeholder="Start date">
+                  <input matEndDate placeholder="End date">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
         <div fxLayoutAlign="center center">
           <button color="primary" mat-stroked-button (click)="cerca()"><mat-icon>search</mat-icon>Cerca</button>
         </div>

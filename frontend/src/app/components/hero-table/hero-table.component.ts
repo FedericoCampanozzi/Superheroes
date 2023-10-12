@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { SuperHero } from 'src/app/models/super-hero.dto';
-import { SuperHeroService } from 'src/app/services/super-hero.service';
+import { SuperHero } from '../../models/super-hero.dto';
+import { SuperHeroService } from '../../services/super-hero.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { HeroDetailDialogComponent } from '../hero-detail-dialog/hero-detail-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UtilityFunction } from '../../utility-function';
 
 @Component({
   selector: 'app-hero-table',
@@ -14,11 +14,11 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./hero-table.component.css']
 })
 export class HeroTableComponent implements OnInit, AfterViewInit {  
-  displayedColumns: string[] = ["ID","Name","FirstName","LastName","City","Controls"]
+  UtilityFunction: UtilityFunction = new UtilityFunction();
+  
+  displayedColumns: string[] = ["ID","DateCreate","Name","FirstName","LastName","City","IsMainCharacter","Controls"];
   heroesDataSource = new MatTableDataSource<SuperHero>();
-  @ViewChild("heroTablePaginator") paginator?: MatPaginator = undefined;
   @ViewChild(MatSort) sort?: MatSort = undefined;
-  heroToEdit?: SuperHero;
 
   constructor(
     private superHeroService: SuperHeroService,
@@ -42,14 +42,13 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if(this.sort != undefined && this.paginator != undefined){
+    if(this.sort != undefined){
       this.heroesDataSource.sort = this.sort;
-      this.heroesDataSource.paginator = this.paginator;
     }
     
     let d = document.getElementById("maxHeightJS");
     let f = document.getElementById("my-footer");
-    let p = document.getElementById("my-paginator");
+    let p = document.getElementById("myRef");
     let divTop = (d == null || d.getBoundingClientRect() == null ? 0 : d.getBoundingClientRect().top);
     let footerTop = (f == null || f.getBoundingClientRect() == null ? 0 : f.getBoundingClientRect().top);
     let paginatorHeight = (p == null || p.getBoundingClientRect() == null ? 0 : p.offsetHeight);
@@ -62,13 +61,14 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
   }
   
   showDetail(hero: SuperHero, mode:boolean) {
-    this.matDialog.open(HeroDetailDialogComponent, {
+    let dialogRef = this.matDialog.open(HeroDetailDialogComponent, {
       data: {
         Hero: mode ? new SuperHero() : new SuperHero().copyFrom(hero),
         IsAddMode: mode
       },
-    })
-    .afterClosed().subscribe((res) => {
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
       this.superHeroService.getSuperHeroes()
       .subscribe((result: SuperHero[]) => {
         this.heroesDataSource.data = result;
@@ -77,11 +77,6 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
   }
 
   showDetailAdd() {
-    this.matDialog.open(HeroDetailDialogComponent, {
-      data: {
-        Hero: new SuperHero(),
-        IsAddMode: true
-      },
-    });
+    this.showDetail(new SuperHero(), true);
   }
 }
