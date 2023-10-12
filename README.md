@@ -1,3 +1,4 @@
+------------------------------
 # SuperheroesAPP
 
 ------------------------------
@@ -7,12 +8,12 @@
 * **Database** : SQL SERVER
 
 ------------------------------
-# Bug Fix
-1. Add Columns into Database:
-  * Protagonista : Bit
-  * Antagonista: Bit
-  * DataCreate: DateTime
-  * DataLastUpdate: DateTim
-  * FotoURL : Varchar
-2. Fix Filter and add date range, protagonisti andagonisti, search for datacreate or last update
-3. Fix Hero detail
+# Bug LIST
+1. Fix filter into sidenav (frontend + backend)
+2. Fix hero DTO
+
+------------------------------
+# Feature LIST
+1. Add data entry into *hero-detail-dialog.component*
+2. Add linq query into backend (test all functionality of E.F. Core 7)
+3. Add API versioning with swagger (https://medium.com/@seldah/managing-multiple-versions-of-your-api-with-net-and-swagger-47b4143e8bf5)
