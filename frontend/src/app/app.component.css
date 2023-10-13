@@ -46,3 +46,7 @@ footer > div.container {
   align-items: center;
   height: 100%;
 }
+
+.box-item-inner > a {
+  color: white;
+}

@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Backend.API.Data;
 using Backend.API.Data.Model;
 
-namespace Backend.API.Controllers
+namespace Backend.API.Controllers.V1
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     public class SuperHeroController : ControllerBase
     {
         private readonly DataContext _context;
@@ -17,7 +18,7 @@ namespace Backend.API.Controllers
             _context = context;
         }
 
-        [HttpPost("create")]   
+        [HttpPost("create")]
         public async Task<ActionResult<List<SuperHero>>> CreateSuperHero(SuperHero hero)
         {
             _context.SuperHeroes.Add(hero);
