@@ -39,22 +39,6 @@ namespace backend.API.Migrations
                 {
                     table.PrimaryKey("PK_SuperHeroes", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "TestUpdateDB",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdCity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TestUpdateDB", x => x.Id);
-                });
         }
 
         /// <inheritdoc />

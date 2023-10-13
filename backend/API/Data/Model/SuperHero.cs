@@ -6,7 +6,7 @@
         public string Name { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public int IdCity { get; set; }        
+        public City city { get; set; }        
         public bool IsMainCharacter { get; set; }
         public DateTime DateCreate { get; set; }
         public DateTime LastDateUpdate { get; set; }

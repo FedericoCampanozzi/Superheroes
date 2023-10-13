@@ -44,7 +44,6 @@ namespace Backend.API.Controllers.V1
             dbHero.Name = hero.Name;
             dbHero.FirstName = hero.FirstName;
             dbHero.LastName = hero.LastName;
-            dbHero.IdCity = hero.IdCity;
 
             await _context.SaveChangesAsync();
 

@@ -45,7 +45,11 @@ public class ConfigureSwaggerOptions: IConfigureNamedOptions<SwaggerGenOptions>
         var info = new OpenApiInfo()
         {
             Title = "SuperHero API v."+ desc.ApiVersion.ToString() + " - build with Swagger",
-            Version = desc.ApiVersion.ToString()
+            Version = desc.ApiVersion.ToString(),
+            Contact = new OpenApiContact() {
+                Name = "Federico Campanozzi",
+                Email = "federico.campanozzi@gmail.com"
+            }
         };
 
         if (desc.IsDeprecated)

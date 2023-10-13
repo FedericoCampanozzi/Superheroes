@@ -1,4 +1,6 @@
-﻿namespace Backend.API.Data.Model
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace Backend.API.Data.Model
 {
     public class City
     {
