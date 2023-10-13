@@ -28,6 +28,7 @@ namespace Backend.API.Controllers.V1
         }
 
         [HttpGet("read")]
+        [Obsolete]
         public async Task<ActionResult<List<SuperHero>>> GetSuperHeroes()
         {
             return Ok(await _context.SuperHeroes.ToListAsync());

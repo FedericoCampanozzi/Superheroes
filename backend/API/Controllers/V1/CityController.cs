@@ -8,6 +8,7 @@ namespace Backend.API.Controllers.V1
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
+    [Obsolete]
     public class CityController : Controller
     {
         private readonly DataContext _context;
