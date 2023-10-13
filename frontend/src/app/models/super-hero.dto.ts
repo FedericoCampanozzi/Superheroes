@@ -4,9 +4,10 @@ export class SuperHero {
     firstName = "";
     lastName = "";
     idCity?: number;
+    cityName = "";
     dateCreate?: Date;
     lastDateUpdate?: Date;
-    isMainCharacter?: boolean;
+    isMainCharacter: boolean = false;
     imageURL? = undefined;
 
     public copyFrom(copy:SuperHero): SuperHero{
@@ -17,6 +18,7 @@ export class SuperHero {
         h.firstName = copy.firstName;
         h.lastName = copy.lastName;
         h.idCity = copy.idCity == undefined ? 0 : copy.idCity;
+        h.cityName = copy.cityName;
         h.dateCreate = copy.dateCreate;
         h.lastDateUpdate = copy.lastDateUpdate;
         h.isMainCharacter = copy.isMainCharacter;

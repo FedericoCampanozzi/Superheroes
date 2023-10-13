@@ -28,14 +28,12 @@ export class AppComponent implements OnInit {
       this.cities = result;
     });
   }
-
-
+  
   toggle(){
     this.sidenav?.toggle();
   }
 
   cerca(){
-    
     this.sidenav?.toggle();
   }
 }

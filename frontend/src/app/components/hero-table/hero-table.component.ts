@@ -26,11 +26,13 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
     private matDialog: MatDialog) {}
 
   ngOnInit(): void {
+    /*
     this.superHeroService
       .getSuperHeroes()
       .subscribe((result: SuperHero[]) => {
         this.heroesDataSource.data = result;
       });
+    */
   }
 
   announceSortChange(sortState: Sort) {
@@ -78,5 +80,9 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
 
   showDetailAdd() {
     this.showDetail(new SuperHero(), true);
+  }
+
+  public CercaEvent(){
+
   }
 }

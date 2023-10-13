@@ -8,10 +8,10 @@ import { SuperHero } from '../models/super-hero.dto';
   providedIn: 'root',
 })
 export class SuperHeroService {
-  private Create = 'SuperHero/create';
-  private Read = 'SuperHero/read';
-  private Update = 'SuperHero/update';
-  private Delete = 'SuperHero/delete';
+  private Create = 'v1/SuperHero/create';
+  private Read = 'v2/SuperHero/read';
+  private Update = 'v1/SuperHero/update';
+  private Delete = 'v1/SuperHero/delete';
   
   constructor(private http: HttpClient) {}
 

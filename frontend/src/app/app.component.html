@@ -11,6 +11,7 @@
         <mat-form-field class="w-90">
           <mat-label>City</mat-label>
           <mat-select [(value)]="filter.idCity">
+            <mat-option [value]="-1">Tutte le citt&agrave;</mat-option>
             <mat-option *ngFor="let city of cities" [value]="city.id">
               {{ city.id }} - {{ city.cityName }} ({{ city.codeNation }})
             </mat-option>

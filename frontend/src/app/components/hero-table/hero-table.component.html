@@ -4,7 +4,6 @@
             <div layout="columns" fxFlex="90">
                 <div class="mat-elevation-z8">
                     <div id="maxHeightJS">
-
                         <table mat-table [dataSource]="heroesDataSource" matSort (matSortChange)="announceSortChange($event)" #heroTable>
 
                             <ng-container matColumnDef="ID">
@@ -34,13 +33,13 @@
 
                             <ng-container matColumnDef="City">
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef> City </th>
-                                <td mat-cell *matCellDef="let hero"> {{hero.idCity}} </td>
+                                <td mat-cell *matCellDef="let hero"> {{hero.cityName}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="IsMainCharacter">
-                                <th mat-header-cell mat-sort-header *matHeaderCellDef> IsMainCharacter </th>
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> Character </th>
                                 <td mat-cell *matCellDef="let hero">
-                                    <mat-checkbox class="w-90" [checked]="hero.IsMainCharacter" [disabled]="true"></mat-checkbox>
+                                    <mat-checkbox [checked]="hero.isMainCharacter" [disabled]="true" class="ck-main"></mat-checkbox>
                                 </td>
                             </ng-container>
 
@@ -73,7 +72,6 @@
                         <div fxFlex="75" id="myRef">
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
