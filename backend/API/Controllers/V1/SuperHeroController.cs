@@ -19,8 +19,13 @@ namespace Backend.API.Controllers.V1
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<List<SuperHero>>> CreateSuperHero(SuperHero hero)
+        public async Task<ActionResult<List<SuperHero>>> CreateSuperHero(SuperHero hero, int Idcity)
         {
+            var dbCity = await _context.Cities.FindAsync(Idcity);
+            if (dbCity == null)
+                return BadRequest("Hero not found.");
+
+            hero.City = dbCity;
             _context.SuperHeroes.Add(hero);
             await _context.SaveChangesAsync();
 
@@ -35,15 +40,23 @@ namespace Backend.API.Controllers.V1
         }
 
         [HttpPut("update")]
-        public async Task<ActionResult<List<SuperHero>>> UpdateSuperHero(SuperHero hero)
+        public async Task<ActionResult<List<SuperHero>>> UpdateSuperHero(SuperHero hero, int Idcity)
         {
             var dbHero = await _context.SuperHeroes.FindAsync(hero.Id);
             if (dbHero == null)
                 return BadRequest("Hero not found.");
 
+            var dbCity = await _context.Cities.FindAsync(Idcity);
+            if (dbCity == null)
+                return BadRequest("Hero not found.");
+
             dbHero.Name = hero.Name;
             dbHero.FirstName = hero.FirstName;
             dbHero.LastName = hero.LastName;
+            dbHero.IsMainCharacter = hero.IsMainCharacter;
+            dbHero.LastDateUpdate = hero.LastDateUpdate;
+            dbHero.ImageURL = hero.ImageURL;
+            dbHero.City = dbCity;
 
             await _context.SaveChangesAsync();
 

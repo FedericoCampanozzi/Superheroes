@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { City } from 'src/app/models/city.dto';
-import { SuperHero } from 'src/app/models/super-hero.dto';
-import { CityService } from 'src/app/services/city.service';
-import { SuperHeroService } from 'src/app/services/super-hero.service';
+import { City } from '../../models/city.dto';
+import { SuperHero } from '../../models/super-hero.dto';
+import { CityService } from '../../services/city.service';
+import { SuperHeroService } from '../../services/super-hero.service';
+import { UtilityFunction } from '../../shared/utility-function';
 
 @Component({
   selector: 'app-hero-detail-dialog',
@@ -11,17 +12,20 @@ import { SuperHeroService } from 'src/app/services/super-hero.service';
   styleUrls: ['./hero-detail-dialog.component.css'],
 })
 export class HeroDetailDialogComponent {
+  UtilityFunction: UtilityFunction = new UtilityFunction();
   hero: SuperHero;
   editMode = false;
   addMode = false;
   cities: City[] = [];
+  selectedCity: number = 0;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<HeroDetailDialogComponent>,
     private superHeroService: SuperHeroService,
     private cityService: CityService) {
-    this.hero = data.Hero
+    this.hero = data.Hero;
+    this.selectedCity = data.Hero.idCity;
     this.cityService.getCities().subscribe(res => {
       this.cities = res;
     });
@@ -31,7 +35,9 @@ export class HeroDetailDialogComponent {
   changeMode(save: boolean){
     if(this.addMode){
       if(save){
-        this.superHeroService.createHero(this.hero)
+        this.hero.dateCreate = new Date();
+        this.hero.lastDateUpdate = new Date();
+        this.superHeroService.createHero(this.hero, this.selectedCity)
         .subscribe((heroes: SuperHero[]) => {
           this.dialogRef.close(heroes);
         });
@@ -39,7 +45,8 @@ export class HeroDetailDialogComponent {
     }
     else {
       if(this.editMode && save){
-        this.superHeroService.updateHero(this.hero)
+        this.hero.lastDateUpdate = new Date();
+        this.superHeroService.updateHero(this.hero, this.selectedCity)
         .subscribe((heroes: SuperHero[]) => {});
       } 
       this.editMode = !this.editMode;

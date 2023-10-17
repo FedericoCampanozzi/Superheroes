@@ -13,25 +13,20 @@
         <input matInput placeholder="Name" [disabled]="!(editMode || addMode)" [(ngModel)]="hero.name" name="name">
       </mat-form-field>
     </div>
-    <div fxFlex="50">
-      <mat-label>Main Character:</mat-label>
-      <mat-checkbox [checked]="hero.isMainCharacter" [disabled]="!(editMode || addMode)" class="ck-main"></mat-checkbox>
+    <div fxFlex="50" fxLayoutAlign="center center">
+      <mat-checkbox [(ngModel)]="hero.isMainCharacter" [disabled]="!(editMode || addMode)" class="ck-main"> Is Main Character </mat-checkbox>
     </div>
   </div>
   <div fxLayout="row">
     <div fxFlex="50">
-      <mat-form-field class="w-100">
-        <mat-label for="dateCreation">Create on</mat-label>
-        <input matInput placeholder="First Name" [disabled]="true" [(ngModel)]="hero.dateCreate"
-          name="dateCreation">
-      </mat-form-field>
+      <div class="w-100">
+        Date Create = <span>{{UtilityFunction.formatDate3(hero.dateCreate)}}</span>
+      </div>
     </div>
     <div fxFlex="50">
-      <mat-form-field class="w-100">
-        <mat-label for="lastDateUpdate">Last Update</mat-label>
-        <input matInput placeholder="First Name" [disabled]="true" [(ngModel)]="hero.lastDateUpdate"
-          name="lastDateUpdate">
-      </mat-form-field>
+      <div class="w-100">
+        Last Update = <span>{{UtilityFunction.formatDate3(hero.dateCreate)}}</span>
+      </div>
     </div>
   </div>
   <div fxLayout="row">
@@ -54,7 +49,7 @@
     <div fxFlex="100">
       <mat-form-field class="w-100">
         <mat-label for="idCity">City</mat-label>
-        <mat-select [(value)]="hero.idCity" [disabled]="!(editMode || addMode)" name="idCity">
+        <mat-select [(value)]="selectedCity" [disabled]="!(editMode || addMode)" name="idCity">
           <mat-option *ngFor="let city of cities" [value]="city.id">
             {{ city.id }} - {{ city.cityName }} ({{ city.codeNation }})
           </mat-option>

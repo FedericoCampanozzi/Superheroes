@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { SuperHero } from '../models/super-hero.dto';
+import { DataSharing } from '../shared/data-sharing';
+import { City } from '../models/city.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -16,20 +18,19 @@ export class SuperHeroService {
   constructor(private http: HttpClient) {}
 
   public getSuperHeroes(): Observable<SuperHero[]> {
-    return this.http.get<SuperHero[]>(`${environment.apiUrl}/${this.Read}`);
+    return this.http.post<SuperHero[]>(`${environment.apiUrl}/${this.Read}`, DataSharing.filterHero);
   }
 
-  public updateHero(hero: SuperHero): Observable<SuperHero[]> {
+  public updateHero(hero: SuperHero, idCity: number): Observable<SuperHero[]> {
     return this.http.put<SuperHero[]>(
-      `${environment.apiUrl}/${this.Update}`,
+      `${environment.apiUrl}/${this.Update}?IdCity=${idCity}`,
       hero
     );
   }
 
-  public createHero(hero: SuperHero): Observable<SuperHero[]> {
+  public createHero(hero: SuperHero, idCity: number): Observable<SuperHero[]> {
     return this.http.post<SuperHero[]>(
-      `${environment.apiUrl}/${this.Create}`,
-      hero
+      `${environment.apiUrl}/${this.Create}?IdCity=${idCity}`,hero,
     );
   }
 

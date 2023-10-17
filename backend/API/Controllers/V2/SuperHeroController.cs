@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.API.Data;
 using Backend.API.Data.Model;
-using Newtonsoft.Json;
+using Backend.API.Data.DTO;
 
 namespace Backend.API.Controllers.V2
 {
@@ -20,19 +20,16 @@ namespace Backend.API.Controllers.V2
         }
 
         [HttpPost("read")]
-        public async Task<ActionResult<List<SuperHero>>> GetSuperHeroes([FromBody] string _json_content)
+        public async Task<ActionResult<List<SuperHero>>> GetSuperHeroes(FilterHeroDTO filter)
         {
-            Dictionary<string, object> parametri = JsonConvert.DeserializeObject<Dictionary<string, object>>(_json_content);
-            Console.WriteLine(parametri);
             return Ok(await 
                 (
                     from sp in _context.SuperHeroes
                     from c in _context.Cities
-                    where sp.City.Id == c.Id && 
-                        (Convert.ToInt32(parametri["idCity"]) == c.Id || Convert.ToInt32(parametri["idCity"]) == -1) &&
-                        (Convert.ToBoolean(parametri["isMainCharacter"])) &&
-                        Convert.ToDateTime(parametri["from"]) >= sp.DateCreate &&
-                        Convert.ToDateTime(parametri["to"]) <= sp.DateCreate
+                    where sp.City.Id == c.Id && // join
+                        (filter.IdCity == c.Id || filter.IdCity == -1) && 
+                        sp.IsMainCharacter == filter.IsMainCharacter &&
+                        sp.DateCreate >= filter.From && sp.DateCreate <= filter.To
                     select new
                     {
                         sp.Id,
