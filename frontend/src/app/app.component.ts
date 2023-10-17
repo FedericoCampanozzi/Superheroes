@@ -1,24 +1,31 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
 import { City } from './models/city.dto';
 import { CityService } from './services/city.service';
-import { FilterHeroDTO } from './models/filter-hero.dto';
+import { HeroTableComponent } from './components/hero-table/hero-table.component';
+import { DataSharing } from './sharing/data-sharing';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'SuperHero.UI';
   mode = new FormControl('over');
   open = true;
   cities: City[] = [];
-  filter: FilterHeroDTO = new FilterHeroDTO();
+  filter = DataSharing.filterHero;
 
   @ViewChild("sidefilter") sidenav?: MatSidenav = undefined;
+  @ViewChild("heroTable") heroTable?: HeroTableComponent = undefined;
 
   public constructor(private CityService: CityService){
+  }
+
+  ngAfterViewInit(): void {    
+    //this.sidenav?.open();
   }
 
   ngOnInit(): void {
@@ -28,14 +35,13 @@ export class AppComponent implements OnInit {
       this.cities = result;
     });
   }
-
-
+  
   toggle(){
     this.sidenav?.toggle();
   }
 
   cerca(){
-    
     this.sidenav?.toggle();
+    this.heroTable?.CercaEvent();
   }
 }

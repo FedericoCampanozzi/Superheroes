@@ -6,14 +6,14 @@ import { SuperHeroService } from '../../services/super-hero.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { HeroDetailDialogComponent } from '../hero-detail-dialog/hero-detail-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { UtilityFunction } from '../../utility-function';
+import { UtilityFunction } from '../../shared/utility-function';
 
 @Component({
   selector: 'app-hero-table',
   templateUrl: './hero-table.component.html',
   styleUrls: ['./hero-table.component.css']
 })
-export class HeroTableComponent implements OnInit, AfterViewInit {  
+export class HeroTableComponent implements AfterViewInit {
   UtilityFunction: UtilityFunction = new UtilityFunction();
   
   displayedColumns: string[] = ["ID","DateCreate","Name","FirstName","LastName","City","IsMainCharacter","Controls"];
@@ -23,14 +23,8 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
   constructor(
     private superHeroService: SuperHeroService,
     private _liveAnnouncer: LiveAnnouncer,
-    private matDialog: MatDialog) {}
+    private matDialog: MatDialog) {
 
-  ngOnInit(): void {
-    this.superHeroService
-      .getSuperHeroes()
-      .subscribe((result: SuperHero[]) => {
-        this.heroesDataSource.data = result;
-      });
   }
 
   announceSortChange(sortState: Sort) {
@@ -46,13 +40,13 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
       this.heroesDataSource.sort = this.sort;
     }
     
-    let d = document.getElementById("maxHeightJS");
+    let js = document.getElementById("maxHeightJS");
     let f = document.getElementById("my-footer");
-    let p = document.getElementById("myRef");
-    let divTop = (d == null || d.getBoundingClientRect() == null ? 0 : d.getBoundingClientRect().top);
+    let p = document.getElementById("div-paginator");
+    let divTop = (js == null || js.getBoundingClientRect() == null ? 0 : js.getBoundingClientRect().top);
     let footerTop = (f == null || f.getBoundingClientRect() == null ? 0 : f.getBoundingClientRect().top);
     let paginatorHeight = (p == null || p.getBoundingClientRect() == null ? 0 : p.offsetHeight);
-    d?.setAttribute("style","overflow-y:auto; height: " + (footerTop - divTop - paginatorHeight - 10) + "px;");
+    js?.setAttribute("style","overflow-y:auto; height: " + (footerTop - divTop - paginatorHeight - 10) + "px;");
   }
   
   deleteHero(hero: SuperHero) {
@@ -78,5 +72,13 @@ export class HeroTableComponent implements OnInit, AfterViewInit {
 
   showDetailAdd() {
     this.showDetail(new SuperHero(), true);
+  }
+
+  CercaEvent(){
+    this.superHeroService
+    .getSuperHeroes()
+    .subscribe((result: SuperHero[]) => {
+      this.heroesDataSource.data = result;
+    });
   }
 }

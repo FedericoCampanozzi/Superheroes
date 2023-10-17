@@ -8,7 +8,7 @@ import { City } from '../models/city.dto';
   providedIn: 'root',
 })
 export class CityService {
-  private ReadCities = 'City/read'
+  private ReadCities = 'v1/City/read'
   
   constructor(private http: HttpClient) {}
 

@@ -1,6 +1,10 @@
-.test {
+.bg-image {
   background-repeat: no-repeat;
   background-size: cover;
+  width: 150px;
+  height: 150px;
+  background-color: black;
+  border-radius: 10px;
 }
 
 .dialog-container {
