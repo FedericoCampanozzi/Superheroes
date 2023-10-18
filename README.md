@@ -3,17 +3,20 @@
 
 ------------------------------
 ## Tecnologies
-* **FrontEnd** : Angular 14 + Material
-* **BackEnd** : .Net Core 6 + Swagger + Entity Framework Core
+* **FrontEnd** : Angular 16 + Material
+* **BackEnd** : .Net Core 6 + Swagger + Entity Framework Core (7.0.11)
 * **Database** : SQL SERVER
 
 ------------------------------
 # Bug LIST
-1. Fix filter into sidenav (frontend + backend)
-2. Fix hero DTO
+1. Fix blurred [frontend]
 
 ------------------------------
 # Feature LIST
-1. Add data entry into *hero-detail-dialog.component*
-2. Add linq query into backend (test all functionality of E.F. Core 7)
-3. Add API versioning with swagger (https://medium.com/@seldah/managing-multiple-versions-of-your-api-with-net-and-swagger-47b4143e8bf5)
+1. Re-Design hero-detail-dialog [frontend]
+2. Add combobox filter hero main character (Yes, No, All) [frontend + backend]
+3. Re-Design filter sidenav [frontend]
+
+------------------------------
+# TO DO LIST
+1. Test functionality
