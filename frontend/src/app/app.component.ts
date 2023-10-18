@@ -4,7 +4,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { City } from './models/city.dto';
 import { CityService } from './services/city.service';
 import { HeroTableComponent } from './components/hero-table/hero-table.component';
-import { DataSharing } from './sharing/data-sharing';
+import { DataSharing } from './shared/data-sharing';
 
 @Component({
   selector: 'app-root',

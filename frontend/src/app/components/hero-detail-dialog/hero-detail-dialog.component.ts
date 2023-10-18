@@ -46,6 +46,7 @@ export class HeroDetailDialogComponent {
     else {
       if(this.editMode && save){
         this.hero.lastDateUpdate = new Date();
+        console.log(this.hero);
         this.superHeroService.updateHero(this.hero, this.selectedCity)
         .subscribe((heroes: SuperHero[]) => {});
       } 

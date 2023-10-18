@@ -1,5 +1,3 @@
-import { DatePipe } from '@angular/common';
-
 export class UtilityFunction {
   public formatDate3(dataStr?: Date): string {
     return UtilityFunction.formatDate3(dataStr);

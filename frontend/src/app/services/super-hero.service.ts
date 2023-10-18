@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { SuperHero } from '../models/super-hero.dto';
 import { DataSharing } from '../shared/data-sharing';
-import { City } from '../models/city.dto';
 
 @Injectable({
   providedIn: 'root',
