@@ -13,7 +13,7 @@
             <mat-form-field class="w-90">
               <mat-label>City</mat-label>
               <mat-select [(value)]="filter.idCity">
-                <mat-option [value]="-1">Tutte le citt&agrave;</mat-option>
+                <mat-option [value]="-1">All cities</mat-option>
                 <mat-option *ngFor="let city of cities" [value]="city.id">
                   {{ city.id }} - {{ city.cityName }} ({{ city.codeNation }})
                 </mat-option>
@@ -27,8 +27,8 @@
               <mat-label>Actor Type</mat-label>
               <mat-select [(value)]="filter.isMainCharacter">
                 <mat-option [value]="-1">All</mat-option>
-                <mat-option [value]="0">Only Pronagonist</mat-option>
-                <mat-option [value]="1">Only Not Protagonist</mat-option>
+                <mat-option [value]="1">Only Pronagonist</mat-option>
+                <mat-option [value]="0">Only Not Protagonist</mat-option>
               </mat-select>
             </mat-form-field>
           </div>

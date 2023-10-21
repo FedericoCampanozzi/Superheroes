@@ -50,13 +50,15 @@ namespace Backend.API.Controllers.V1
             if (dbCity == null)
                 return BadRequest("Hero not found.");
 
+            dbHero.Id = hero.Id;
             dbHero.Name = hero.Name;
             dbHero.FirstName = hero.FirstName;
             dbHero.LastName = hero.LastName;
+            dbHero.City = dbCity;
             dbHero.IsMainCharacter = hero.IsMainCharacter;
+            dbHero.DateCreate = hero.DateCreate;
             dbHero.LastDateUpdate = hero.LastDateUpdate;
             dbHero.ImageURL = hero.ImageURL;
-            dbHero.City = dbCity;
 
             await _context.SaveChangesAsync();
 
