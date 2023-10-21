@@ -11,7 +11,7 @@ import { DataSharing } from './shared/data-sharing';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'SuperHero.UI';
   mode = new FormControl('over');
   open = true;
@@ -22,10 +22,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild("heroTable") heroTable?: HeroTableComponent = undefined;
 
   public constructor(private CityService: CityService){
-  }
-
-  ngAfterViewInit(): void {    
-    //this.sidenav?.open();
   }
 
   ngOnInit(): void {
@@ -41,6 +37,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   cerca(){
+    console.log("this.filter=",this.filter);
     this.sidenav?.toggle();
     this.heroTable?.CercaEvent();
   }

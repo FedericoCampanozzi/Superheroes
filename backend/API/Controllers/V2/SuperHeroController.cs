@@ -27,8 +27,8 @@ namespace Backend.API.Controllers.V2
                     from sp in _context.SuperHeroes
                     from c in _context.Cities
                     where sp.City.Id == c.Id && // join
-                        (filter.IdCity == c.Id || filter.IdCity == -1) && 
-                        sp.IsMainCharacter == filter.IsMainCharacter &&
+                        (filter.IdCity == -1 || filter.IdCity == c.Id) && 
+                        (filter.IsMainCharacter == -1 || sp.IsMainCharacter == Convert.ToBoolean(filter.IsMainCharacter)) &&
                         sp.DateCreate >= filter.From && sp.DateCreate <= filter.To
                     select new
                     {

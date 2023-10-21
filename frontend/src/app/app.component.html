@@ -8,8 +8,8 @@
   <mat-sidenav-container>
     <mat-sidenav #sidefilter [mode]="'over'" class="my-sidenav-container" [opened]="true">
       <div class="my-sidenav-inner-container">
-        <div fxLayout="row" class="w-90">
-          <div fxFlex="70">
+        <div fxLayout="row">
+          <div fxFlex="100">
             <mat-form-field class="w-90">
               <mat-label>City</mat-label>
               <mat-select [(value)]="filter.idCity">
@@ -20,8 +20,17 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div fxFlex="30" fxLayoutAlign="center center">
-            <mat-checkbox class="w-90" [(ngModel)]="filter.isMainCharacter">Main Char.</mat-checkbox>
+        </div>
+        <div fxLayout="row">
+          <div fxFlex="100">
+            <mat-form-field class="w-90">
+              <mat-label>Actor Type</mat-label>
+              <mat-select [(value)]="filter.isMainCharacter">
+                <mat-option [value]="-1">All</mat-option>
+                <mat-option [value]="0">Only Pronagonist</mat-option>
+                <mat-option [value]="1">Only Not Protagonist</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
         <div fxLayout="row">
@@ -29,8 +38,8 @@
             <mat-form-field appearance="fill" class="w-90">
               <mat-label>Date creation range</mat-label>
               <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate placeholder="Start date">
-                <input matEndDate placeholder="End date">
+                <input matStartDate placeholder="Start date" [(ngModel)]="filter.from">
+                <input matEndDate placeholder="End date" [(ngModel)]="filter.to">
               </mat-date-range-input>
               <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
